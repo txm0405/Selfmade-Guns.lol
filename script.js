@@ -1,3 +1,9 @@
+// Import and initialize Vercel Speed Insights
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+// Initialize Speed Insights
+injectSpeedInsights();
+
 let hasUserInteracted = false;
 
 function initMedia() {
