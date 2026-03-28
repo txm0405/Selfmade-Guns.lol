@@ -1,4 +1,5 @@
 let hasUserInteracted = false;
+let socketRetry = 0;
 
 function initMedia() {
   console.log("initMedia called");
@@ -11,7 +12,11 @@ function initMedia() {
   backgroundMusic.volume = 0.3;
   backgroundVideo.muted = true; 
 
-  
+  backgroundVideo.addEventListener('error', () => {
+    console.warn('Background video failed to load, hiding video element.');
+    backgroundVideo.style.display = 'none';
+  });
+
   backgroundVideo.play().catch(err => {
     console.error("Failed to play background video:", err);
   });
@@ -169,9 +174,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function connectWebSocket() {
+    if (!('WebSocket' in window)) {
+      console.warn('WebSocket is not supported by this browser.');
+      return;
+    }
+
     const ws = new WebSocket('wss://api.lanyard.rest/socket');
 
     ws.onopen = () => {
+      socketRetry = 0;
       ws.send(JSON.stringify({
         op: 2,
         d: {
@@ -193,9 +204,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    ws.onclose = () => {
-      // Reconnect after some time
-      setTimeout(connectWebSocket, 5000);
+    ws.onclose = (event) => {
+      if (event.code !== 1000 && socketRetry < 5) {
+        socketRetry += 1;
+        console.warn(`WebSocket closed unexpectedly (attempt ${socketRetry}), retrying in 5s.`);
+        setTimeout(connectWebSocket, 5000);
+      }
     };
 
     ws.onerror = (error) => {

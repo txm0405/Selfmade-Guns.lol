@@ -271,6 +271,7 @@
             src: url('assets/Angel_wish.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
+            font-display: swap;
         }
 
         #profile-name {
@@ -847,7 +848,9 @@
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet">
+    <meta name="description" content="Cyber-inspired cash profile with animated badges, live Discord presence, and interactive audio/visual effects.">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet"></noscript>
 </head>
 <body class="home-theme" onload="initMedia()">
     
@@ -886,39 +889,39 @@
                             <div class="badge-box-inner">
                                 <div class="badge-group">
                                     <div class="badge-container">
-                                        <img src="assets/staff.gif" alt="Staff" class="badge">
+                                        <img src="assets/staff.gif" alt="Staff" width="22" height="22" decoding="async" class="badge">
                                         <span class="tooltip">Staff Member</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src="assets/owner.gif" alt="Owner" class="badge">
+                                        <img src="assets/owner.gif" alt="Owner" width="22" height="22" decoding="async" class="badge">
                                         <span class="tooltip">Owner</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src="assets/partner.gif" alt="Partner" class="badge">
+                                        <img src="assets/partner.gif" alt="Partner" width="22" height="22" decoding="async" class="badge">
                                         <span class="tooltip">Partner</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src="assets/developer.webp" alt="Developer" class="badge">
+                                        <img src="assets/developer.webp" alt="Developer" width="22" height="22" decoding="async" class="badge">
                                         <span class="tooltip">Developer</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src="assets/bug_bounty.gif" alt="Bug Bounty" class="badge">
+                                        <img src="assets/bug_bounty.gif" alt="Bug Bounty" width="22" height="22" decoding="async" class="badge">
                                         <span class="tooltip">Bug Bounty</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src="assets/hated_guns.gif" alt="Hated by Guns.lol" class="badge">
+                                        <img src="assets/hated_guns.gif" alt="Hated by Guns.lol" width="22" height="22" decoding="async" class="badge">
                                         <span class="tooltip">Hated by Guns.lol</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src="assets/hated_fakecrime.gif" alt="Hated by Fakecrime.bio" class="badge">
+                                        <img src="assets/hated_fakecrime.gif" alt="Hated by Fakecrime.bio" width="22" height="22" decoding="async" class="badge">
                                         <span class="tooltip">Hated by Fakecrime.bio</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src="assets/verified.gif" alt="Verified" class="badge">
+                                        <img src="assets/verified.gif" alt="Verified" width="22" height="22" decoding="async" class="badge">
                                         <span class="tooltip">Verified</span>
                                     </div>
                                     <div class="badge-container">
-                                        <img src="assets/rule_maker.gif" alt="Rule Maker" class="badge">
+                                        <img src="assets/rule_maker.gif" alt="Rule Maker" width="22" height="22" decoding="async" class="badge">
                                         <span class="tooltip">Rule Maker</span>
                                     </div>
                                 </div>
@@ -1001,9 +1004,11 @@
                 <svg id="volume-icon" class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
                 </svg>
+                <label for="volume-slider" class="sr-only">Volume</label>
                 <input id="volume-slider" class="slider" type="range" min="0" max="1" step="0.01" value="0.3">
             </div>
             <div class="transparency-control">
+                <label for="transparency-slider" class="sr-only">Transparency</label>
                 <svg class="transparency-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -1014,8 +1019,9 @@
     </div>
 
 
-    <audio id="background-music" loop>
+    <audio id="background-music" loop preload="none">
         <source src="assets/background_music.mp3" type="audio/mp3">
+        <track kind="captions" srclang="en" label="English captions" src="assets/background_music_captions.vtt">
     </audio>
 
 
